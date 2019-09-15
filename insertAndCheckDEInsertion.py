@@ -1,4 +1,11 @@
-###### ASYNC-DEInsertion - REST API #########
+##### ASYNC-DEInsertion - REST API #####
+##### READ ME - せつめいしょ #####
+# Async による　DE のインサートです。
+# Sync 処理とは違い、リクエストが終わればあとは　SFMC のサービス上で非同期処理を行います。
+# メリット🙆‍♀️：呼び出し元のプログラムがインサートの処理完了を待たなくてもよいです
+# デメリット🙅‍♂️：ちゃんと後から結果を確認する必要があります。
+# Insertの正常時のHTTPステータスコード202(Accepted) はリクエストの文法があっていることしかわかりません。
+
 import urllib.request
 import json 
 import datetime
@@ -18,7 +25,7 @@ clientSecret = 'PLEASE INSERT YOUR v1 Legacy ClientSecret' # 秘密の情報
 domain = "PleaseInsertYourTesetingEmailDomain.co.jp" # テスト用のEmailドメイン。Emailの項目に使う
 rowsInserting = 300 # 何レコード追加するか。　だいたい一万前後でガタがくる
 retryTimer = [20,60,120] #API リトライの間隔。単位は秒 
-### リトライはお作法です###
+### <h1>リトライはお作法です</h1>###
 
 ##### 初期化 #####
 responseBody = []
