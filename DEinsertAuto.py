@@ -1,3 +1,4 @@
+ 
 import urllib.request
 import json 
 import datetime
@@ -13,16 +14,18 @@ import sys
  
 ##### 定数 #####
 # DE  
-deExternalKey = 'zzzzzzz' # DE の外部キーを入
+deExternalKey = '<Your DE External Key>' # DE の外部キーを入
 columnArray = ["ContactKey","Name","Email"] #DEの列名を列挙する
 valueArray = ["PythonSubs","たうんりばー","pyuser"] #基本となるDEの行データ　
 # パッケージ
-clientID = 'zzzzzzzzzz' # 秘密の情報。
-clientSecret = 'zzzzzzzzzzz' # 秘密の情報
-mid = 'xxxxxxxxxxxxxx'
+clientID = '<Your ClientID>' # 秘密の情報。
+clientSecret = ‘<Your ClientSecret>’# 秘密の情報
+mid = '<Your MID>'
+authURL = "https://<Your TSE>.auth.marketingcloudapis.com/v2/token"
+restURL = "https://<Your TSE>.rest.marketingcloudapis.com/" # ちゃんと末尾にスラッシュを入れる！！
 # 附帯情報
-domain = "dammydomain.aaaaaaaaaaazzzzzzzzzzz.co.jp" # テスト用のEmailドメイン。Emailの項目に使う
-rowsInserting = 10 # 何レコード追加するか。　だいたい一万前後でガタがくる
+domain = "<dammy Domain>.co.jp" # テスト用のEmailドメイン。Emailの項目に使う
+rowsInserting = 1000 # 何レコード追加するか。　だいたい一万前後でガタがくる
 retryTimer = [20,60,120] #API リトライの間隔。単位は秒 
 ### <h1>リトライはお作法です</h1>###
  
@@ -34,13 +37,13 @@ requestBody = []
 # 1) 認証トークンの取得@v1
 def getAuthentication():
     # HTTP リクエスト定義
-    url = "https://<Tenant Specific Domain>.auth.marketingcloudapis.com/v2/token"
+    url = authURL
     headers = {
-        "Content-Type": "application/json;charset=utf-8"
+        "Content-Type": "application/json;charset=sjis"
     }
     data = {
         "grant_type": "client_credentials",
-        "client_id": clientID,
+        "client_id": clientID ,
         "client_secret": clientSecret,
         "account_id": mid
     }  
@@ -56,7 +59,7 @@ def getAuthentication():
 def renInsert(token,bodyobj):
     # HTTP リクエスト定義
     Auth =  "'Authorization'" + " : " + "'Bearer " +   token + "'"
-    url = 'https://<Tenant Specific Domain>.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:' + deExternalKey + '/rows'
+    url = restURL + '/data/v1/async/dataextensions/key:' + deExternalKey + '/rows'
     headers = {
         'Content-Type': 'application/json;charset=utf-8',
         'Authorization': 'Bearer ' + token
@@ -123,7 +126,8 @@ def createBody3(colAr,valAr,rowsInserting):
 def checkStatus(token,reqId2):
     # HTTP リクエスト定義
     Auth =  "'Authorization'" + " : " + "'Bearer " +   token + "'"
-    url = 'https://<Tenant Specific Domain>.rest.marketingcloudapis.com/data/v1/async/' + reqId2 + '/results'
+    url = restURL + 'data/v1/async/' + reqId2 + '/results'
+ 
     headers = {
         'Content-Type': 'application/json;charset=utf-8',
         'Authorization': 'Bearer ' + token
@@ -179,3 +183,4 @@ while okCnt != rowsInserting:
         print("インサート非同期処理終了時刻"+str(datetime.datetime.now()))
     else:
         time.sleep(3)
+
