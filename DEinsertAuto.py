@@ -19,6 +19,7 @@ valueArray = ["PythonSubs","たうんりばー","pyuser"] #基本となるDEの�
 # パッケージ
 clientID = 'zzzzzzzzzz' # 秘密の情報。
 clientSecret = 'zzzzzzzzzzz' # 秘密の情報
+mid = 'xxxxxxxxxxxxxx'
 # 附帯情報
 domain = "dammydomain.aaaaaaaaaaazzzzzzzzzzz.co.jp" # テスト用のEmailドメイン。Emailの項目に使う
 rowsInserting = 10 # 何レコード追加するか。　だいたい一万前後でガタがくる
@@ -39,9 +40,9 @@ def getAuthentication():
     }
     data = {
         "grant_type": "client_credentials",
-        "client_id": "xxxxxx",
-        "client_secret": "xxxxxxx",
-        "account_id": "xxxxx"
+        "client_id": clientID,
+        "client_secret": clientSecret,
+        "account_id": mid
     }  
  
     # 実行 
