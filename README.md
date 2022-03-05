@@ -1,12 +1,11 @@
 # sfmcapis
 
 MCのRestAPIを実行するPythonのプログラムです。
-ご自身の端末にてPythonが実行可能ならば下記プログラムを実行できるはずです。
-引数は不要です。
+ご自身の端末にてPythonが実行可能ならば、ターミナルやPowershellから下記のようにプログラムを実行できるはずです。
+どのプログラムも引数は不要です。
 
-　　_python <filename>.py_
+　　_python filename.py_
 
-のように実行可能です。
   
 # ざっくりしたつかいかた
 
