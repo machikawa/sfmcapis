@@ -109,4 +109,4 @@ res = getAuthentication()
 createdMSG = createPushMessage(res["access_token"])
 print("メッセージ作成が完了しました。MessageID: " + createdMSG + " を使ってください")
 # メッセージ送信
-sendMessage(res["access_token"], messageId)
+sendMessage(res["access_token"], createdMSG)
